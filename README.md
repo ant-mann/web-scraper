@@ -1,31 +1,26 @@
-Nature Journal Web Scraper
+# Nature Journal Web Scraper
 
-A robust Python-based web scraper designed to crawl multiple pages of the Nature.com article archive. This tool automates the process of identifying specific article types (e.g., "Research Highlight," "News"), extracting their content, and organizing them into a structured local directory.
-🚀 Features
+A multi-page web scraping application built with Python that extracts articles from the [Nature.com](https://www.nature.com) archive. The program automates the process of navigating search results, filtering by article category, and saving content into a structured local directory.
 
-    Multi-Page Crawling: Dynamically navigates through a user-specified number of result pages.
+## 🚀 Features
 
-    Article Filtering: Filters articles by category (type) based on user input.
+* **Dynamic Multi-Page Crawling**: Scrapes a user-defined number of result pages by manipulating URL parameters.
+* **Selective Extraction**: Filters articles based on specific types (e.g., "Research Highlight", "News", "Nature Briefing") provided via user input.
+* **Automated Data Organization**: Automatically creates and manages nested directories (`Page_1`, `Page_2`, etc.) for clean data storage.
+* **Filename Sanitization**: Processes article titles by removing punctuation and replacing spaces with underscores to ensure filesystem compatibility.
+* **Robust Parsing**: Utilizes `BeautifulSoup4` to navigate complex HTML structures and extract the core article body.
 
-    Automated Directory Management: Creates organized Page_N folders for each page processed.
+## 🛠️ Technical Stack
 
-    Content Extraction: Parses full article bodies and saves them as .txt files with cleaned, filesystem-friendly filenames.
+* **Python 3.x**
+* **Requests**: For handling HTTP protocols and managing session headers.
+* **BeautifulSoup4**: For DOM traversal and data extraction.
+* **OS Library**: For directory management and file I/O operations.
 
-🛠️ Tech Stack
+## 📂 Directory Structure
 
-    Python 3
-
-    Requests: To handle HTTP GET requests and navigate the web.
-
-    BeautifulSoup4: To parse HTML and extract specific data attributes and body text.
-
-    OS & String Modules: For directory creation and filename sanitization.
-
-📂 Project Structure
-
-When the script runs, it generates a directory structure like this:
-Plaintext
-
+Upon execution, the script organizes extracted data as follows:
+```
 .
 ├── scraper.py          # Main application logic
 ├── Page_1/             # Articles found on page 1
@@ -33,38 +28,37 @@ Plaintext
 │   └── Article_Title_Two.txt
 ├── Page_2/             # Articles found on page 2 (even if empty)
 └── ...
+```
 
-⚙️ How It Works
+## ⚙️ How to Run
 
-    User Input: The script prompts for the number of pages to scrape and the specific type of article to save.
+### Prerequisites
 
-    URL Construction: It iterates through the Nature archive using query parameters (?page=N).
-
-    Parsing: For every page, it identifies all <article> tags and checks the data-test='article.type' attribute.
-
-    File I/O: If a match is found, the script follows the article link, extracts the body text from the c-article-body or article__teaser classes, and writes it to a file.
-
-📝 Usage
-
-    Clone the repository.
-
-    Ensure you have the required libraries installed:
-    Bash
-
+Ensure you have Python installed, then install the necessary dependencies:
+```
 pip install requests beautifulsoup4
+```
 
-Run the script:
-Bash
+### Execution
 
-python scraper.py
+1. Run the script from your terminal:
+`python scraper.py`
+2. Provide the requested inputs:
+    * **Number of pages**: The total number of pages to crawl (e.g., `5`).
+    * **Article type**: The exact string of the category to filter (e.g., `Research Highlight`).
 
-Enter your parameters when prompted:
-Plaintext
+### Example
+```
+2
+News
+Saved all articles.
+```
 
-    > 4
-    > Nature Briefing
-    Saved all articles.
+## 🎓 Learning Objectives
 
-🎓 Context
+This project was completed as part of the **JetBrains Academy** Python Developer track. Key concepts practiced include:
 
-This project was developed as part of the JetBrains Academy "Web Scraper" track. It focuses on mastering HTTP status codes, handling dynamic URL parameters, and managing local file systems in Python.
+* Processing HTTP response status codes.
+* Working with the `BeautifulSoup` library for web parsing.
+* Managing file systems and binary file writing in Python.
+* Implementing control flow for iterative scraping across multiple web endpoints.
